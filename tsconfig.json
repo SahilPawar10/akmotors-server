@@ -2,11 +2,9 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist",
-
-    "module": "nodenext",
     "target": "esnext",
+    "module": "nodenext",
     "moduleResolution": "nodenext",
-
     "types": ["node"],
 
     "sourceMap": true,
@@ -26,6 +24,8 @@
     "esModuleInterop": true
   },
   "ts-node": {
-    "esm": true
-  }
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
+  "include": ["src"]
 }

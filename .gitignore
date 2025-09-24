@@ -5,3 +5,8 @@ node_modules
 # Code coverage
 coverage
 
+dist/
+.env
+
+
+# create server , mongo db for photos and login storage settings;
