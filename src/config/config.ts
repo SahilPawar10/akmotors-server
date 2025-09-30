@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/typedef */
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
