@@ -40,11 +40,11 @@ export class AuthController {
     res.send({ ...tokens });
   });
 
-  static forgotPassword = catchAsync(async (req, res) => {
-    const resetPasswordToken = await TokenRepository.generateResetPasswordToken(req.body.email);
-    // await emailService.sendResetPasswordEmail(req.body.email, resetPasswordToken);
-    res.status(httpStatus.NO_CONTENT).send();
-  });
+  // static forgotPassword = catchAsync(async (req, res) => {
+  //   const resetPasswordToken = await TokenRepository.generateResetPasswordToken(req.body.email);
+  //   // await emailService.sendResetPasswordEmail(req.body.email, resetPasswordToken);
+  //   res.status(httpStatus.NO_CONTENT).send();
+  // });
 
   static resetPassword = catchAsync(async (req, res) => {
     await AuthRepository.resetPassword(req.query.token as any, req.body.password);
