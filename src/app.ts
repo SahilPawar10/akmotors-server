@@ -8,6 +8,7 @@ import cors from "cors";
 import { errorConverter, errorHandlerMiddleware } from "./middleware/error.js";
 import ApiError from "./utils/ApiError.js";
 import { jwtStrategy } from "./config/passport.js";
+import routes from "./routes/v1/index.js";
 const app: Express = express();
 
 app.use(bodyParser.json({ limit: "50mb" })); // Adjust the limit as needed
@@ -36,6 +37,9 @@ app.use(errorHandlerMiddleware);
 
 app.use(passport.initialize());
 passport.use("jwt", jwtStrategy);
+
+// v1 api routes
+app.use("/v1", routes);
 
 // send back a 404 error for any unknown api request
 app.use((req: Request, res: Response, next: NextFunction) => {

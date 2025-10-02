@@ -1,4 +1,6 @@
 import dotenv from "dotenv";
+import { ConnectOptions } from "mongoose";
+
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 
@@ -70,7 +72,7 @@ if (error) {
 const config: {
   env: EnvVars["NODE_ENV"];
   port: number;
-  mongoose: { url: string; options: { useNewUrlParser: boolean; useUnifiedTopology: boolean } };
+  mongoose: { url: string; options: any };
   jwt: {
     secret: string;
     accessExpirationMinutes: number;
@@ -93,7 +95,7 @@ const config: {
   port: env.PORT,
   mongoose: {
     url: env.NODE_ENV === "development" ? env.MONGODB_URL || "" : env.MONGODB_URL,
-    options: { useNewUrlParser: true, useUnifiedTopology: true },
+    options: {} as ConnectOptions,
   },
   jwt: {
     secret: env.JWT_SECRET,

@@ -16,7 +16,7 @@ const logger: Logger = winston.createLogger({
     enumerateErrorFormat(),
     config.env === "development" ? format.colorize() : format.uncolorize(),
     format.splat(),
-    // eslint-disable-next-line @typescript-eslint/typedef
+
     format.printf(({ level, message }) => `${level}: ${message}`),
   ),
   transports: [

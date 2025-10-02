@@ -1,4 +1,4 @@
-import mongoose, { Document, Model, Schema, Types } from "mongoose";
+import mongoose, { Document, Model, Types } from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import { paginate } from "../plugins/paginate.plugin.js";
@@ -16,17 +16,22 @@ export interface IUserModel extends Model<IUserDocument> {
   isEmailTaken(email: string, excludeUserId?: Types.ObjectId): Promise<boolean>;
 }
 
+// Model type (static methods live here)
+export interface IUserModel extends Model<IUserDocument> {
+  isMobileTaken(mobile: number, excludeUserId?: Types.ObjectId): Promise<boolean>;
+}
+
 // Schema
-const userSchema = new Schema<IUserDocument, IUserModel>(
+const userSchema = new mongoose.Schema<IUserDocument, IUserModel>(
   {
     firstName: {
       type: String,
-      required: true,
+      required: false,
       minlength: 3,
     },
     lastName: {
       type: String,
-      required: true,
+      required: false,
       minlength: 3,
     },
     number: {
@@ -36,7 +41,7 @@ const userSchema = new Schema<IUserDocument, IUserModel>(
     },
     email: {
       type: String,
-      required: true,
+      required: false,
       unique: true,
       trim: true,
       lowercase: true,
@@ -90,6 +95,15 @@ userSchema.statics.isEmailTaken = async function (
   excludeUserId?: Types.ObjectId,
 ): Promise<boolean> {
   const user = await this.findOne({ email, _id: { $ne: excludeUserId } });
+  return !!user;
+};
+
+// Static methods
+userSchema.statics.isMobileTaken = async function (
+  mobile: number,
+  excludeUserId?: Types.ObjectId,
+): Promise<boolean> {
+  const user = await this.findOne({ number: mobile, _id: { $ne: excludeUserId } });
   return !!user;
 };
 

@@ -1,8 +1,11 @@
 import app from "./app.js";
+import logger from "./config/logger.js";
+import { connectMongoDb } from "./database/mongodb/mongo.connection.js";
 
 const port: number | string = process.env.PORT || 3000;
 
+await connectMongoDb();
+
 app.listen(port, () => {
-  console.log(`server is running at port ${port}`);
-  console.log(`🚀 Running Node version: ${process.version}`);
+  logger.info(`🚀 Server running on port ${port}`);
 });

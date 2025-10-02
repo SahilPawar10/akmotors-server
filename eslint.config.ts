@@ -22,7 +22,7 @@ export default defineConfig([
       "prettier/prettier": "error",
 
       /* ✅ TypeScript strictness */
-      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/explicit-function-return-type": "warn",
       // 🚨 Enforce explicit typing everywhere
@@ -30,11 +30,11 @@ export default defineConfig([
         "error",
         {
           // arrayDestructuring: true,
-          arrowParameter: true,
+          arrowParameter: false,
           objectDestructuring: false, // disable forcing type annotations for destructuring
-          memberVariableDeclaration: true,
+          // memberVariableDeclaration: false,
           parameter: true,
-          propertyDeclaration: true,
+          // propertyDeclaration: false,
           // variableDeclaration: true,
           variableDeclarationIgnoreFunction: true,
         },

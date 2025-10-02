@@ -22,7 +22,12 @@ const errorConverter = (err: any, req: Request, res: Response, next: NextFunctio
 
 // Centralized error handler
 
-const errorHandlerMiddleware = (err: ApiError, req: Request, res: Response): void => {
+const errorHandlerMiddleware = (
+  err: ApiError,
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void => {
   let { statusCode, message } = err;
 
   if (config.env === "production" && !err.isOperational) {
