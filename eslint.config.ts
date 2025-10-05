@@ -35,7 +35,6 @@ export default defineConfig([
           parameter: true,
           // propertyDeclaration: false,
           // variableDeclaration: true,
-          variableDeclarationIgnoreFunction: true,
         },
       ],
 

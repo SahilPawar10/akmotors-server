@@ -22,6 +22,8 @@ interface EnvVars {
   NODE_ENV: "development" | "production";
   PORT: number;
   MONGODB_URL: string;
+  NEON_DB_URL: string;
+
   MONGODB_TEST_URL?: string;
   JWT_SECRET: string;
   JWT_ACCESS_EXPIRATION_MINUTES: number;
@@ -44,6 +46,7 @@ const envVarsSchema: ObjectSchema<EnvVars> = Joi.object<EnvVars>({
   NODE_ENV: Joi.string().valid("development", "test", "production").required(),
   PORT: Joi.number().default(3000),
   MONGODB_URL: Joi.string().required(),
+  NEON_DB_URL: Joi.string().required(),
   MONGODB_TEST_URL: Joi.string().optional(),
   JWT_SECRET: Joi.string().required(),
   JWT_ACCESS_EXPIRATION_MINUTES: Joi.number().default(30),
@@ -73,6 +76,7 @@ const config: {
   env: EnvVars["NODE_ENV"];
   port: number;
   mongoose: { url: string; options: any };
+  postgres: { url: string };
   jwt: {
     secret: string;
     accessExpirationMinutes: number;
@@ -96,6 +100,9 @@ const config: {
   mongoose: {
     url: env.NODE_ENV === "development" ? env.MONGODB_URL || "" : env.MONGODB_URL,
     options: {} as ConnectOptions,
+  },
+  postgres: {
+    url: env.NEON_DB_URL,
   },
   jwt: {
     secret: env.JWT_SECRET,
