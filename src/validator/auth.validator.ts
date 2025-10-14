@@ -1,11 +1,7 @@
-import Joi, { ObjectSchema } from "joi";
-import { passwordVerify } from "./custom.validation.js";
+import Joi from "joi";
+import { passwordVerify, ValidationSchema } from "./custom.validation.js";
 
 // Define interface for validation objects
-interface ValidationSchema {
-  body?: ObjectSchema;
-  query?: ObjectSchema;
-}
 
 const register: ValidationSchema = {
   body: Joi.object().keys({

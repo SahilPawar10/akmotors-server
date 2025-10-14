@@ -13,8 +13,8 @@
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "format": "prettier --write .",
     "prepare": "husky",
-    "generate:migration": "drizzle-kit generate --config=src/database/postgres/drizzle.config.ts",
-    "push": "drizzle-kit push --config=src/database/postgres/drizzle.config.ts",
+    "migration:generate": "drizzle-kit generate --config=src/database/postgres/drizzle.config.ts",
+    "migration:run": "drizzle-kit push --config=src/database/postgres/drizzle.config.ts",
     "migrate": "drizzle-kit migrate"
   },
   "lint-staged": {
