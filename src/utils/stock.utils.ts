@@ -70,4 +70,8 @@ export class StockRepository {
     // await user.remove();
     return stock;
   };
+
+  static insertBulkStocks = async (stockBody: Partial<IStocks[]>) => {
+    return Stocks.insertMany(stockBody);
+  };
 }

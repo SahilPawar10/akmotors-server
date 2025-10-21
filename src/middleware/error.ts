@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response, NextFunction } from "express";
 import mongoose from "mongoose";
 import httpStatus from "http-status";
@@ -45,7 +46,6 @@ const errorHandlerMiddleware = (
 
   if (config.env === "development") {
     logger.error(err);
-    next();
   }
 
   res.status(statusCode).send(response);

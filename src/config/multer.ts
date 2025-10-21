@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import multer, { StorageEngine, FileFilterCallback } from "multer";
 import { Request } from "express";
-import ApiError from "../utils/ApiError.js";
 
 // Option 1: Save to disk
 // const multerStorage: StorageEngine = multer.diskStorage({

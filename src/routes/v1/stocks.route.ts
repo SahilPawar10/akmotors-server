@@ -1,8 +1,12 @@
 import express, { Router } from "express";
 import { StocksController } from "../../controller/stocks.controller.js";
+import { uploadFile } from "../../config/multer.js";
 const router: Router = express.Router();
 
 router.route("/").post(StocksController.addNewStock).get(StocksController.getAllStocks);
+
+router.post("/import-stocks", uploadFile("file"), StocksController.importStockData);
+router.get("/stocks-sample-file", StocksController.exportSampleStocks);
 
 // router.post("/locationwise", BikeServiceController.locationWiseService);
 // router.get("/", LocationController.getAllLocation);
