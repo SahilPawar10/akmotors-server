@@ -2,6 +2,9 @@ import express, { Router } from "express";
 import authRoute from "./auth.route.js";
 import locationRoute from "./location.route.js";
 import vehicleRoute from "./vehicle.route.js";
+import serviceRoute from "./service.route.js";
+import stockRoute from "./stocks.route.js";
+import stockEntryRoute from "./stockEntry.route.js";
 
 const router: Router = express.Router();
 
@@ -23,14 +26,18 @@ const defaultRoutes: RouteConfig[] = [
     path: "/vehicle",
     route: vehicleRoute,
   },
-  //   {
-  //     path: "/chat",
-  //     route: messageRoute,
-  //   },
-  //   {
-  //     path: "/loan",
-  //     route: loanRoutes,
-  //   },
+  {
+    path: "/service",
+    route: serviceRoute,
+  },
+  {
+    path: "/stocks",
+    route: stockRoute,
+  },
+  {
+    path: "/stock-entry",
+    route: stockEntryRoute,
+  },
 ];
 
 defaultRoutes.forEach((route) => {

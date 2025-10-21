@@ -18,8 +18,17 @@ export class StockEntryBookRepository {
    * Get users without photo
    * @returns {Promise<IStocksEntry[]>}
    */
-  static getAllStockEntries = async (): Promise<IStocksEntry[]> =>
-    StocksEntry.find().select("-createdAt -updatedAt").exec();
+  static getAllStockEntries = async (): Promise<IStocksEntry[]> => {
+    const data = await StocksEntry.find()
+      .populate({
+        path: "stock", // the field that references the Stocks collection
+        select: "partName position partCode", // only include these fields from Stocks
+      })
+      .select("-createdAt -updatedAt -month -year -buyingpriceperQty -sellingpriceperQty -__v")
+      .exec();
+    const result = data.map((entry) => entry.toJSON()) as any;
+    return result;
+  };
 
   /**
    * Get user by id
@@ -49,18 +58,18 @@ export class StockEntryBookRepository {
     return stockEntry;
   };
 
-  /**
-   * Delete user by id
-   * @param stockId
-   * @returns {Promise<IStocks>}
-   */
-  static deleteStockById = async (stockId: string): Promise<IStocks> => {
-    const stockEntry = await this.getStockEntryById(stockId);
-    if (!stockEntry) {
-      throw new ApiError(httpStatus.NOT_FOUND, "User not found");
-    }
+  // /**
+  //  * Delete user by id
+  //  * @param stockId
+  //  * @returns {Promise<IStocks>}
+  //  */
+  // static deleteStockById = async (stockId: string): Promise<IStocks> => {
+  //   const stockEntry = await this.getStockEntryById(stockId);
+  //   if (!stockEntry) {
+  //     throw new ApiError(httpStatus.NOT_FOUND, "User not found");
+  //   }
 
-    // await user.remove();
-    return stockEntry;
-  };
+  //   // await user.remove();
+  //   return stockEntry;
+  // };
 }

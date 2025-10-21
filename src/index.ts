@@ -3,7 +3,7 @@ import logger from "./config/logger.js";
 import { connectMongoDb } from "./database/mongodb/mongo.connection.js";
 import { connectNeon } from "./database/postgres/pg.connection.js";
 
-const port: number | string = process.env.PORT || 3000;
+const port: number | string = process.env.PORT || 5000;
 
 async function startServer() {
   try {

@@ -1,12 +1,20 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response, NextFunction } from "express";
 import { status as httpStatus } from "http-status";
 import catchAsync from "../utils/catchAsync.js";
 import { StockEntryBookRepository } from "../utils/stockEntry.utils.js";
+import { parseDateInfo } from "../services/commen.js";
 export class StocksEntryController {
   static addNewStockEntry = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const entry = await StockEntryBookRepository.createStockEntry(req.body);
-      res.status(httpStatus.CREATED).send(entry);
+      const dateInfo = parseDateInfo(req.body.date);
+
+      const { date, ...rest } = req.body;
+
+      const body = { ...dateInfo, ...rest };
+
+      const entry = await StockEntryBookRepository.createStockEntry(body);
+      return res.status(httpStatus.CREATED).send(entry);
     } catch (error) {
       return next(error);
     }
@@ -16,7 +24,12 @@ export class StocksEntryController {
     try {
       // register logic here
       const entryBook = await StockEntryBookRepository.getAllStockEntries();
-      res.status(httpStatus.OK).send(entryBook);
+      const flattened = entryBook.map((entry) => ({
+        ...entry.stock, // merge Stocks fields into root
+        ...entry,
+        stock: undefined, // remove nested stocks
+      }));
+      res.status(httpStatus.OK).send(flattened);
     } catch (error) {
       return next(error);
     }

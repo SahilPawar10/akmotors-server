@@ -1,7 +1,5 @@
 import express, { Router } from "express";
-
-import { StocksEntryController } from "../../controller/stockentrybook.controller.js";
-
+import { StocksEntryController } from "../../controller/stockEntry.controller.js";
 const router: Router = express.Router();
 
 router
@@ -9,8 +7,8 @@ router
   .post(StocksEntryController.addNewStockEntry)
   .get(StocksEntryController.getAllStocksEntry);
 
-// router.post("/regionwise", validate(getLocationByRegion), StocksEntryController.regionWiseLocation);
-// router.get("/", LocationController.getAllLocation);
+// router.post("/locationwise", BikeServiceController.locationWiseService);
+// router.get("/get", StocksEntryController.getAllStocksEntry);
 
 // router.post("/refresh-tokens", validate(refreshTokens), AuthController.refreshTokens);
 // router.post("/login", validate(login), AuthController.login);

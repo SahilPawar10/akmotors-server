@@ -1,3 +1,6 @@
+/**
+ * Custom API Error class for consistent error handling
+ */
 export default class ApiError extends Error {
   public statusCode: number;
   public isOperational: boolean;
@@ -14,7 +17,7 @@ export default class ApiError extends Error {
       Error.captureStackTrace(this, this.constructor);
     }
 
-    // Set the prototype explicitly (needed when extending built-in classes in TS)
-    Object.setPrototypeOf(this, ApiError.prototype);
+    // Fix prototype chain (important when extending built-in classes in TypeScript)
+    Object.setPrototypeOf(this, new.target.prototype);
   }
 }

@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import { status as httpStatus } from "http-status";
 import catchAsync from "../utils/catchAsync.js";
-import { VehicleRepository } from "../utils/vehical.utils.js";
+import { BikeServiceRepository } from "../utils/bikeService.utils.js";
 export class BikeServiceController {
   static addBikeServiceEntry = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
       try {
-        const vehical = await VehicleRepository.addVehicle(req.body);
+        const vehical = await BikeServiceRepository.addbikeServices(req.body);
         res.status(httpStatus.CREATED).send(vehical);
       } catch (error) {
         return next(error);
@@ -20,18 +20,18 @@ export class BikeServiceController {
     // get all location
     try {
       // register logic here
-      const vehical = await VehicleRepository.getAllVehicals();
+      const vehical = await BikeServiceRepository.getbikeServicess();
       res.status(httpStatus.OK).send(vehical);
     } catch (error) {
       return next(error);
     }
   });
 
-  static locationWiseVehicle = catchAsync(
+  static locationWiseService = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         // register logic here
-        const vehical = await VehicleRepository.getVehiclesByLocation(req.body.location);
+        const vehical = await BikeServiceRepository.getbikeServicessByLocation(req.body.location);
         res.status(httpStatus.OK).send(vehical);
       } catch (error) {
         return next(error);
