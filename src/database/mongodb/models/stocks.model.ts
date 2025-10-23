@@ -31,9 +31,6 @@ const stocksSchema = new mongoose.Schema<IStocks>(
     partCategoty: {
       type: String,
     },
-    partDesc: {
-      type: String,
-    },
   },
   {
     timestamps: true,

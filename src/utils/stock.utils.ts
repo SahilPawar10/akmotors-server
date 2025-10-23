@@ -19,6 +19,8 @@ export class StockRepository {
    */
   static getAllStocks = async (): Promise<IStocks[]> =>
     Stocks.find().select("-createdAt -partImage -password -updatedAt").exec();
+  // total byed stock ; total sold stock;
+  // credit entry where cash earned via each stock it it for each stock;
 
   /**
    * Get user by id

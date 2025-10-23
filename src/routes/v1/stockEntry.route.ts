@@ -8,7 +8,7 @@ router
   .get(StocksEntryController.getAllStocksEntry);
 
 // router.post("/locationwise", BikeServiceController.locationWiseService);
-// router.get("/get", StocksEntryController.getAllStocksEntry);
+router.get("/stock-book", StocksEntryController.getStockBookData);
 
 // router.post("/refresh-tokens", validate(refreshTokens), AuthController.refreshTokens);
 // router.post("/login", validate(login), AuthController.login);

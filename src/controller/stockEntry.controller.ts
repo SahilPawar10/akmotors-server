@@ -35,6 +35,16 @@ export class StocksEntryController {
     }
   });
 
+  static getStockBookData = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      // register logic here
+      const stockBook = await StockEntryBookRepository.stocKBookData();
+      res.status(httpStatus.OK).send(stockBook);
+    } catch (error) {
+      return next(error);
+    }
+  });
+
   //   static locationWiseVehicle = catchAsync(
   //     async (req: Request, res: Response, next: NextFunction) => {
   //       try {

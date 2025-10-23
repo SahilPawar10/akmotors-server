@@ -58,6 +58,51 @@ export class StockEntryBookRepository {
     return stockEntry;
   };
 
+  static stocKBookData = async (): Promise<any[]> => {
+    //
+    const result = await StocksEntry.aggregate([
+      {
+        $group: {
+          _id: "$stock",
+          totalBought: { $sum: "$quantity" },
+          totalSold: { $sum: "$selledQty" },
+          overAllPaid: { $sum: "$overAllPaid" },
+        },
+      },
+      {
+        $lookup: {
+          from: "stocks",
+          localField: "_id",
+          foreignField: "_id",
+          as: "stockData",
+        },
+      },
+      { $unwind: "$stockData" },
+      {
+        $project: {
+          _id: 0,
+          partName: "$stockData.partName",
+          partCode: "$stockData.partCode",
+          position: "$stockData.position",
+          totalBought: 1,
+          totalSold: 1,
+          overAllPaid: 1,
+          remainingStock: { $subtract: ["$totalBought", "$totalSold"] },
+        },
+      },
+    ]);
+    const formatted = result.map((item) => ({
+      partName: item.partName,
+      partCode: item.partCode,
+      position: item.position,
+      totalBought: item.totalBought,
+      totalSold: item.totalSold,
+      remainingStock: item.remainingStock,
+      overAllPaid: item.overAllPaid,
+    }));
+    return formatted;
+  };
+
   // /**
   //  * Delete user by id
   //  * @param stockId

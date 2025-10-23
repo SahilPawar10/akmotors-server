@@ -19,7 +19,14 @@ export class LocationRepository {
   };
 
   static getLocations = async () => {
-    const result = await db.select().from(location);
+    const result = await db
+      .select({
+        id: location.id,
+        villageName: location.villageName,
+        region: location.region,
+        taluka: location.taluka,
+      })
+      .from(location);
     return result as Location[];
   };
 
