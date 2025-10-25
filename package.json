@@ -9,6 +9,7 @@
     "dev": "cross-env NODE_ENV=development nodemon",
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "build": "tsc",
+    "postinstall": "if [ \"$NODE_ENV\" = \"production\" ]; then npm install --include=dev; fi",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "format": "prettier --write .",
