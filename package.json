@@ -12,7 +12,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "format": "prettier --write .",
-    "prepare": "husky",
+    "prepare": "if [ \"$NODE_ENV\" != \"production\" ]; then husky install; else echo 'Skipping husky in production'; fi",
     "migration:generate": "drizzle-kit generate --config=src/database/postgres/drizzle.config.ts",
     "migration:run": "drizzle-kit push --config=src/database/postgres/drizzle.config.ts",
     "migrate": "drizzle-kit migrate"
