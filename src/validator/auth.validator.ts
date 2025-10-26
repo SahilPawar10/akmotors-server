@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { passwordVerify, ValidationSchema } from "./custom.validation.js";
+import { passwordVerify, ValidationSchema } from "./custom.validation";
 
 // Define interface for validation objects
 

@@ -2,9 +2,9 @@
 import { Request, Response, NextFunction } from "express";
 import mongoose from "mongoose";
 import httpStatus from "http-status";
-import config from "../config/config.js";
-import logger from "../config/logger.js";
-import ApiError from "../utils/ApiError.js";
+import config from "../config/config";
+import logger from "../config/logger";
+import ApiError from "../utils/ApiError";
 
 // Convert any error into ApiError instance
 const errorConverter = (err: any, req: Request, res: Response, next: NextFunction): void => {

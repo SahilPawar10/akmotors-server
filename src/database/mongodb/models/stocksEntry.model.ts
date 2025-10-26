@@ -1,5 +1,5 @@
 import mongoose, { Document } from "mongoose";
-import { toJSON } from "../plugins/toJSON.plugin.js";
+import { toJSON } from "../plugins/toJSON.plugin";
 // 1. Define an interface for the Token document
 export interface IStocksEntry extends Document {
   date: string;

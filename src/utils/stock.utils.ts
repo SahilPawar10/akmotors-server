@@ -1,7 +1,7 @@
 /* eslint-disable arrow-body-style */
 import { status as httpStatus } from "http-status";
-import Stocks, { IStocks } from "../database/mongodb/models/stocks.model.js";
-import ApiError from "./ApiError.js";
+import Stocks, { IStocks } from "../database/mongodb/models/stocks.model";
+import ApiError from "./ApiError";
 
 export class StockRepository {
   /**

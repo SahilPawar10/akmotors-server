@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import validate from "../../middleware/validate.js";
+import validate from "../../middleware/validate";
 import {
   //   forgotPassword,
   login,
@@ -7,8 +7,8 @@ import {
   refreshTokens,
   register,
   resetPassword,
-} from "../../validator/auth.validator.js";
-import { AuthController } from "../../controller/auth.controller.js";
+} from "../../validator/auth.validator";
+import { AuthController } from "../../controller/auth.controller";
 
 const router: Router = express.Router();
 

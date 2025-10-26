@@ -1,7 +1,7 @@
 import { Strategy as JwtStrategy, ExtractJwt, StrategyOptions } from "passport-jwt";
-import config from "./config.js";
-import { TOKEN_TYPES } from "./constant.js";
-import User, { IUserDocument } from "../database/mongodb/models/user.model.js";
+import config from "./config";
+import { TOKEN_TYPES } from "./constant";
+import User, { IUserDocument } from "../database/mongodb/models/user.model";
 
 interface JwtPayload {
   sub: string; // user id

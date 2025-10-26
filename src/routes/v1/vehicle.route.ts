@@ -1,7 +1,7 @@
 import express, { Router } from "express";
-import validate from "../../middleware/validate.js";
-import { addVehicleSchema, getVehicalByLocation } from "../../validator/vehical.validation.js";
-import { VehicleController } from "../../controller/vehicle.controller.js";
+import validate from "../../middleware/validate";
+import { addVehicleSchema, getVehicalByLocation } from "../../validator/vehical.validation";
+import { VehicleController } from "../../controller/vehicle.controller";
 
 const router: Router = express.Router();
 

@@ -1,6 +1,6 @@
 import mongoose, { Document } from "mongoose";
-import { TOKEN_TYPES } from "../../../config/constant.js";
-import { toJSON } from "../plugins/toJSON.plugin.js";
+import { TOKEN_TYPES } from "../../../config/constant";
+import { toJSON } from "../plugins/toJSON.plugin";
 // 1. Define an interface for the Token document
 export interface IToken extends Document {
   token: string;

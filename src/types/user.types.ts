@@ -1,4 +1,4 @@
-import { Role } from "../config/roles.js";
+import { Role } from "../config/roles";
 
 export interface IUser {
   firstName: string;

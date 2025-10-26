@@ -1,18 +1,13 @@
 import dotenv from "dotenv";
 import { ConnectOptions } from "mongoose";
-
-import { fileURLToPath } from "url";
-import path, { dirname } from "path";
-
+import path from "path";
 import Joi, { ObjectSchema } from "joi";
 
-// Recreate __filename and __dirname in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// ✅ CommonJS mode already provides __dirname and __filename
+// So we don’t recreate them manually — just use them directly.
 
 // Use NODE_ENV or fallback to 'development'
 const envFile = `.env.${process.env.NODE_ENV || "development"}`;
-// Use NODE_ENV or fallback to 'development'
 
 dotenv.config({
   path: path.join(__dirname, `../../${envFile}`),
@@ -41,7 +36,6 @@ interface EnvVars {
   EMAIL_FROM?: string;
 }
 
-// ✅ Explicit type annotation fixes ESLint
 const envVarsSchema: ObjectSchema<EnvVars> = Joi.object<EnvVars>({
   NODE_ENV: Joi.string().valid("development", "test", "production").required(),
   PORT: Joi.number().default(3000),
@@ -64,37 +58,15 @@ const envVarsSchema: ObjectSchema<EnvVars> = Joi.object<EnvVars>({
   EMAIL_FROM: Joi.string().optional(),
 }).unknown();
 
-// Validate environment variables
-const { value: env, error } = envVarsSchema.validate(process.env, { abortEarly: false });
+const { value: env, error } = envVarsSchema.validate(process.env, {
+  abortEarly: false,
+});
 
 if (error) {
   throw new Error(`Config validation error: ${error.message}`);
 }
 
-// Explicit type annotation for config
-const config: {
-  env: EnvVars["NODE_ENV"];
-  port: number;
-  mongoose: { url: string; options: any };
-  postgres: { url: string };
-  jwt: {
-    secret: string;
-    accessExpirationMinutes: number;
-    refreshExpirationDays: number;
-    resetPasswordExpirationMinutes: number;
-    verifyEmailExpirationMinutes: number;
-  };
-  msg91: {
-    authkey?: string;
-    templatekey?: string;
-    sendotpurl?: string;
-    url?: string;
-  };
-  email: {
-    smtp: { host?: string; port?: number; auth: { user?: string; pass?: string } };
-    from?: string;
-  };
-} = {
+const config = {
   env: env.NODE_ENV,
   port: env.PORT,
   mongoose: {

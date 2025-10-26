@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import { status as httpStatus } from "http-status";
-import catchAsync from "../utils/catchAsync.js";
-// import { db } from "../database/postgres/pg.connection.js";
-// import { location } from "../database/postgres/models/pg.models.js";
-import { LocationRepository } from "../utils/location.utils.js";
+import catchAsync from "../utils/catchAsync";
+// import { db } from "../database/postgres/pg.connection";
+// import { location } from "../database/postgres/models/pg.models";
+import { LocationRepository } from "../utils/location.utils";
 export class LocationController {
   static addLocation = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     try {

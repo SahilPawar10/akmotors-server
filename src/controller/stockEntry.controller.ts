@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response, NextFunction } from "express";
 import { status as httpStatus } from "http-status";
-import catchAsync from "../utils/catchAsync.js";
-import { StockEntryBookRepository } from "../utils/stockEntry.utils.js";
-import { parseDateInfo } from "../services/commen.js";
+import catchAsync from "../utils/catchAsync";
+import { StockEntryBookRepository } from "../utils/stockEntry.utils";
+import { parseDateInfo } from "../services/commen";
 export class StocksEntryController {
   static addNewStockEntry = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     try {

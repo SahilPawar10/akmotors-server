@@ -1,13 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response, NextFunction } from "express";
 import { status as httpStatus } from "http-status";
-import catchAsync from "../utils/catchAsync.js";
-import { StockRepository } from "../utils/stock.utils.js";
-import ApiError from "../utils/ApiError.js";
-import {
-  convertExcelBufferFileToJsonUsingXlsx,
-  generateExcelFileBuffer,
-} from "../services/commen.js";
+import catchAsync from "../utils/catchAsync";
+import { StockRepository } from "../utils/stock.utils";
+import ApiError from "../utils/ApiError";
+import { convertExcelBufferFileToJsonUsingXlsx, generateExcelFileBuffer } from "../services/commen";
 export class StocksController {
   static addNewStock = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     try {

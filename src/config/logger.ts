@@ -1,5 +1,5 @@
 import winston, { format, transports, Logger } from "winston";
-import config from "./config.js";
+import config from "./config";
 
 // Custom format to handle Error objects
 const enumerateErrorFormat = format((info: any) => {

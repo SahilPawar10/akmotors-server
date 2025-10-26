@@ -1,13 +1,13 @@
 import { Types } from "mongoose";
-import config from "../config/config.js";
+import config from "../config/config";
 import moment, { Moment } from "moment";
 import jwt from "jsonwebtoken";
 import { status as httpStatus } from "http-status";
-import Token, { IToken } from "../database/mongodb/models/token.model.js";
-import ApiError from "./ApiError.js";
-import { UserRepository } from "./user.utils.js";
-import { TOKEN_TYPES } from "../config/constant.js";
-import { IUserDocument } from "../database/mongodb/models/user.model.js";
+import Token, { IToken } from "../database/mongodb/models/token.model";
+import ApiError from "./ApiError";
+import { UserRepository } from "./user.utils";
+import { TOKEN_TYPES } from "../config/constant";
+import { IUserDocument } from "../database/mongodb/models/user.model";
 
 export class TokenRepository {
   /**

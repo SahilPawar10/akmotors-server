@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { TOKEN_TYPES } from "../config/constant.js";
-import Token from "../database/mongodb/models/token.model.js";
-import { IUserDocument } from "../database/mongodb/models/user.model.js";
-import ApiError from "./ApiError.js";
-import { TokenRepository } from "./token.utils.js";
-import { UserRepository } from "./user.utils.js";
+import { TOKEN_TYPES } from "../config/constant";
+import Token from "../database/mongodb/models/token.model";
+import { IUserDocument } from "../database/mongodb/models/user.model";
+import ApiError from "./ApiError";
+import { TokenRepository } from "./token.utils";
+import { UserRepository } from "./user.utils";
 import { status as httpStatus } from "http-status";
 
 export class AuthRepository {
@@ -25,7 +25,7 @@ export class AuthRepository {
   ): Promise<IUserDocument> => {
     const user = await UserRepository.getUserByMobile(number);
     if (!user || !(await user.isPasswordMatch(password))) {
-      throw new ApiError(httpStatus.UNAUTHORIZED, "Incorrect email or password");
+      throw new ApiError(httpStatus.UNPROCESSABLE_ENTITY, "Incorrect email or password");
     }
     return user;
   };

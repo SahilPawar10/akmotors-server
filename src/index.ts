@@ -1,7 +1,7 @@
-import app from "./app.js";
-import logger from "./config/logger.js";
-import { connectMongoDb } from "./database/mongodb/mongo.connection.js";
-import { connectNeon } from "./database/postgres/pg.connection.js";
+import app from "./app";
+import logger from "./config/logger";
+import { connectMongoDb } from "./database/mongodb/mongo.connection";
+import { connectNeon } from "./database/postgres/pg.connection";
 
 const port: number | string = process.env.PORT || 5000;
 

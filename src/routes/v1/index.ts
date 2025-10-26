@@ -1,10 +1,10 @@
 import express, { Router } from "express";
-import authRoute from "./auth.route.js";
-import locationRoute from "./location.route.js";
-import vehicleRoute from "./vehicle.route.js";
-import serviceRoute from "./service.route.js";
-import stockRoute from "./stocks.route.js";
-import stockEntryRoute from "./stockEntry.route.js";
+import authRoute from "./auth.route";
+import locationRoute from "./location.route";
+import vehicleRoute from "./vehicle.route";
+import serviceRoute from "./service.route";
+import stockRoute from "./stocks.route";
+import stockEntryRoute from "./stockEntry.route";
 
 const router: Router = express.Router();
 

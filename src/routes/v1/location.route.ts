@@ -1,7 +1,7 @@
 import express, { Router } from "express";
-import { LocationController } from "../../controller/location.controller.js";
-import validate from "../../middleware/validate.js";
-import { addLocationSchema, getLocationByRegion } from "../../validator/location.validator.js";
+import { LocationController } from "../../controller/location.controller";
+import validate from "../../middleware/validate";
+import { addLocationSchema, getLocationByRegion } from "../../validator/location.validator";
 
 const router: Router = express.Router();
 

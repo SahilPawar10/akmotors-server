@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { BikeServiceController } from "../../controller/bikeService.controller.js";
+import { BikeServiceController } from "../../controller/bikeService.controller";
 const router: Router = express.Router();
 
 router

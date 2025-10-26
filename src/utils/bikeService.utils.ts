@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { bikeServices } from "../database/postgres/models/pg.models.js";
-import { db } from "../database/postgres/pg.connection.js";
+import { bikeServices } from "../database/postgres/models/pg.models";
+import { db } from "../database/postgres/pg.connection";
 import { eq, InferInsertModel, InferSelectModel } from "drizzle-orm";
 
 export type NewbikeServices = InferInsertModel<typeof bikeServices>;

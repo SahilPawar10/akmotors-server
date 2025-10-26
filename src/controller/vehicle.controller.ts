@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { status as httpStatus } from "http-status";
-import catchAsync from "../utils/catchAsync.js";
-import { VehicleRepository } from "../utils/vehical.utils.js";
+import catchAsync from "../utils/catchAsync";
+import { VehicleRepository } from "../utils/vehical.utils";
 export class VehicleController {
   static addVehicle = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     try {

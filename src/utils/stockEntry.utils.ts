@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable arrow-body-style */
 import { status as httpStatus } from "http-status";
-import StocksEntry, { IStocksEntry } from "../database/mongodb/models/stocksEntry.model.js";
-import ApiError from "./ApiError.js";
+import StocksEntry, { IStocksEntry } from "../database/mongodb/models/stocksEntry.model";
+import ApiError from "./ApiError";
 
 export class StockEntryBookRepository {
   /**

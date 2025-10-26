@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { ValidationSchema } from "./custom.validation.js";
+import { ValidationSchema } from "./custom.validation";
 
 export const addLocationSchema: ValidationSchema = {
   body: Joi.object().keys({

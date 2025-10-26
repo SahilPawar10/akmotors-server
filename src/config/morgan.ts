@@ -1,6 +1,6 @@
 import morgan, { Options, StreamOptions } from "morgan";
-import config from "./config.js";
-import logger from "./logger.js";
+import config from "./config";
+import logger from "./logger";
 import { Request, RequestHandler, Response } from "express";
 
 // Create a custom Morgan token for error messages

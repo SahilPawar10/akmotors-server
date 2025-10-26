@@ -1,7 +1,7 @@
 import { status as httpStatus } from "http-status";
-import User, { IUserDocument } from "../database/mongodb/models/user.model.js";
-import { IUser } from "../types/user.types.js";
-import ApiError from "./ApiError.js";
+import User, { IUserDocument } from "../database/mongodb/models/user.model";
+import { IUser } from "../types/user.types";
+import ApiError from "./ApiError";
 import { FilterQuery, Types } from "mongoose";
 
 export interface QueryOptions {

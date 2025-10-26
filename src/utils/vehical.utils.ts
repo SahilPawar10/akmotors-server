@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { status as httpStatus } from "http-status";
-import { vehicles } from "../database/postgres/models/pg.models.js";
-import { db } from "../database/postgres/pg.connection.js";
-import ApiError from "./ApiError.js";
+import { vehicles } from "../database/postgres/models/pg.models";
+import { db } from "../database/postgres/pg.connection";
+import ApiError from "./ApiError";
 import { eq, InferInsertModel, InferSelectModel } from "drizzle-orm";
 
 export type newVehical = InferInsertModel<typeof vehicles>;

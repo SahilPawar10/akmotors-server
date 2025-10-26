@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import { status as httpStatus } from "http-status";
-import catchAsync from "../utils/catchAsync.js";
-import { UserRepository } from "../utils/user.utils.js";
-import { TokenRepository } from "../utils/token.utils.js";
-import { AuthRepository } from "../utils/auth.utils.js";
+import catchAsync from "../utils/catchAsync";
+import { UserRepository } from "../utils/user.utils";
+import { TokenRepository } from "../utils/token.utils";
+import { AuthRepository } from "../utils/auth.utils";
 
 export class AuthController {
   static register = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
@@ -22,8 +22,22 @@ export class AuthController {
       // register logic here
       const { number, password } = req.body;
       const user = await AuthRepository.loginUserWithNumberAndPassword(number, password);
-      const tokens = await TokenRepository.generateAuthTokens(user);
-      res.status(httpStatus.CREATED).send({ user, tokens });
+      const { access, refresh } = await TokenRepository.generateAuthTokens(user);
+      // Set cookies
+      res.cookie("accessToken", access, {
+        httpOnly: true,
+        secure: true, // must be HTTPS
+        sameSite: "none", // allow cross-site
+        maxAge: 1000 * 60 * 15,
+      });
+
+      res.cookie("refreshToken", refresh, {
+        httpOnly: true,
+        secure: true, // must be HTTPS
+        sameSite: "none", // allow cross-site
+        maxAge: 1000 * 60 * 15,
+      });
+      res.status(httpStatus.CREATED).send({ user });
       //   const tokens =
     } catch (error) {
       return next(error);
@@ -36,8 +50,28 @@ export class AuthController {
   });
 
   static refreshTokens = catchAsync(async (req, res) => {
-    const tokens = await AuthRepository.refreshAuth(req.body.refreshToken);
-    res.send({ ...tokens });
+    const refreshToken = req.cookies.refreshToken; // read cookie
+    if (!refreshToken) {
+      return res.status(401).send({ message: "No refresh token" });
+    }
+    const { access, refresh } = await AuthRepository.refreshAuth(refreshToken);
+
+    // Set cookies
+    res.cookie("accessToken", access, {
+      httpOnly: true,
+      secure: true, // must be HTTPS
+      sameSite: "none", // allow cross-site
+      maxAge: 1000 * 60 * 15,
+    });
+
+    res.cookie("refreshToken", refresh, {
+      httpOnly: true,
+      secure: true, // must be HTTPS
+      sameSite: "none", // allow cross-site
+      maxAge: 1000 * 60 * 15,
+    });
+
+    res.status(httpStatus.CREATED).send({ access, refresh });
   });
 
   // static forgotPassword = catchAsync(async (req, res) => {

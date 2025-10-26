@@ -1,6 +1,6 @@
 import express, { Router } from "express";
-import { StocksController } from "../../controller/stocks.controller.js";
-import { uploadFile } from "../../config/multer.js";
+import { StocksController } from "../../controller/stocks.controller";
+import { uploadFile } from "../../config/multer";
 const router: Router = express.Router();
 
 router.route("/").post(StocksController.addNewStock).get(StocksController.getAllStocks);

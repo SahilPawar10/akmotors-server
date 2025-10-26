@@ -3,13 +3,15 @@ import bodyParser from "body-parser";
 import { status as httpStatus } from "http-status";
 import passport from "passport";
 // import config from "./config/config.js";
-import { Morgan } from "./config/morgan.js";
+import { Morgan } from "./config/morgan";
 import cors from "cors";
-import { errorConverter, errorHandlerMiddleware } from "./middleware/error.js";
-import ApiError from "./utils/ApiError.js";
-import { jwtStrategy } from "./config/passport.js";
-import routes from "./routes/v1/index.js";
+import { errorConverter, errorHandlerMiddleware } from "./middleware/error";
+import ApiError from "./utils/ApiError";
+import { jwtStrategy } from "./config/passport";
+import routes from "./routes/v1/index";
 const app: Express = express();
+
+const allowedOrigins = ["http://localhost:3000", "https://akmotorspatan.netlify.app"];
 
 app.use(bodyParser.json({ limit: "50mb" })); // Adjust the limit as needed
 app.use(
@@ -23,23 +25,41 @@ app.use(
 
 app.set("trust proxy", true);
 
-app.use(cors());
+// app.use(cors());
+
+app.use(
+  cors({
+    origin(origin: any, callback: any) {
+      // allow requests with no origin (like Postman)
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, // ✅ allow cookies
+  }),
+);
 
 //morgan request handler
 app.use(Morgan.successHandler);
 app.use(Morgan.errorHandler);
-
-// convert error to ApiError, if needed
-app.use(errorConverter);
-
-// // handle error
-app.use(errorHandlerMiddleware);
 
 app.use(passport.initialize());
 passport.use("jwt", jwtStrategy);
 
 // v1 api routes
 app.use("/v1", routes);
+
+// convert error to ApiError, if needed
+app.use(errorConverter);
+
+// // handle error
+app.use(errorHandlerMiddleware);
 
 // send back a 404 error for any unknown api request
 app.use((req: Request, res: Response, next: NextFunction) => {

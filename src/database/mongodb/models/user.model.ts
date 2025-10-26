@@ -1,11 +1,11 @@
 import mongoose, { Document, Model, Types } from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
-import { paginate } from "../plugins/paginate.plugin.js";
-import { toJSON } from "../plugins/toJSON.plugin.js";
+import { paginate } from "../plugins/paginate.plugin";
+import { toJSON } from "../plugins/toJSON.plugin";
 
-import { roles } from "../../../config/roles.js";
-import { IUser } from "../../../types/user.types.js";
+import { roles } from "../../../config/roles";
+import { IUser } from "../../../types/user.types";
 // Document type (instance methods live here)
 export interface IUserDocument extends IUser, Document {
   isPasswordMatch(password: string): Promise<boolean>;

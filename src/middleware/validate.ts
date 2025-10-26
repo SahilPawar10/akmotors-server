@@ -1,8 +1,8 @@
 import Joi, { ObjectSchema } from "joi";
 import { status as httpStatus } from "http-status";
 import { Request, Response, NextFunction } from "express";
-import pick from "../utils/pick.utils.js";
-import ApiError from "../utils/ApiError.js";
+import pick from "../utils/pick.utils";
+import ApiError from "../utils/ApiError";
 
 type Schema = {
   params?: ObjectSchema;
