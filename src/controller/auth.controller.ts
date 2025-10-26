@@ -29,6 +29,7 @@ export class AuthController {
         secure: true, // must be HTTPS
         sameSite: "none", // allow cross-site
         maxAge: 1000 * 60 * 15,
+        path: "/", // make sure it's available everywhere
       });
 
       res.cookie("refreshToken", refresh, {
@@ -36,6 +37,7 @@ export class AuthController {
         secure: true, // must be HTTPS
         sameSite: "none", // allow cross-site
         maxAge: 1000 * 60 * 15,
+        path: "/", // make sure it's available everywhere
       });
       res.status(httpStatus.CREATED).send({ user });
       //   const tokens =
