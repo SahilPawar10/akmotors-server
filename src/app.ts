@@ -11,8 +11,6 @@ import { jwtStrategy } from "./config/passport";
 import routes from "./routes/v1/index";
 const app: Express = express();
 
-const allowedOrigins = ["http://localhost:3000", "https://akmotorspatan.netlify.app"];
-
 app.use(bodyParser.json({ limit: "50mb" })); // Adjust the limit as needed
 app.use(
   bodyParser.urlencoded({
@@ -25,25 +23,7 @@ app.use(
 
 app.set("trust proxy", true);
 
-// app.use(cors());
-
-app.use(
-  cors({
-    origin(origin: any, callback: any) {
-      // allow requests with no origin (like Postman)
-      if (!origin) {
-        return callback(null, true);
-      }
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      } else {
-        return callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true, // ✅ allow cookies
-  }),
-);
+app.use(cors());
 
 //morgan request handler
 app.use(Morgan.successHandler);
