@@ -5,7 +5,9 @@ import { passwordVerify, ValidationSchema } from "./custom.validation";
 
 const register: ValidationSchema = {
   body: Joi.object().keys({
-    email: Joi.string().optional().email(),
+    firstName: Joi.string().required(),
+    lastName: Joi.string().required(),
+    email: Joi.string().optional().required(),
     password: Joi.string().optional().custom(passwordVerify),
     number: Joi.number().required(),
   }),

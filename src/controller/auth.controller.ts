@@ -20,27 +20,11 @@ export class AuthController {
   static login = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     try {
       // register logic here
+      // ffndndkvn
       const { number, password } = req.body;
       const user = await AuthRepository.loginUserWithNumberAndPassword(number, password);
-      const { access, refresh } = await TokenRepository.generateAuthTokens(user);
-      // Set cookies
-      res.cookie("accessToken", access, {
-        httpOnly: true,
-        secure: true, // must be HTTPS
-        sameSite: "none", // allow cross-site
-        maxAge: 1000 * 60 * 15,
-        path: "/", // make sure it's available everywhere
-      });
-
-      res.cookie("refreshToken", refresh, {
-        httpOnly: true,
-        secure: true, // must be HTTPS
-        sameSite: "none", // allow cross-site
-        maxAge: 1000 * 60 * 15,
-        path: "/", // make sure it's available everywhere
-      });
-      res.status(httpStatus.CREATED).send({ user });
-      //   const tokens =
+      const tokens = await TokenRepository.generateAuthTokens(user);
+      return res.status(httpStatus.CREATED).send({ user, tokens });
     } catch (error) {
       return next(error);
     }
@@ -52,28 +36,8 @@ export class AuthController {
   });
 
   static refreshTokens = catchAsync(async (req, res) => {
-    const refreshToken = req.cookies.refreshToken; // read cookie
-    if (!refreshToken) {
-      return res.status(401).send({ message: "No refresh token" });
-    }
-    const { access, refresh } = await AuthRepository.refreshAuth(refreshToken);
-
-    // Set cookies
-    res.cookie("accessToken", access, {
-      httpOnly: true,
-      secure: true, // must be HTTPS
-      sameSite: "none", // allow cross-site
-      maxAge: 1000 * 60 * 15,
-    });
-
-    res.cookie("refreshToken", refresh, {
-      httpOnly: true,
-      secure: true, // must be HTTPS
-      sameSite: "none", // allow cross-site
-      maxAge: 1000 * 60 * 15,
-    });
-
-    res.status(httpStatus.CREATED).send({ access, refresh });
+    const tokens = await AuthRepository.refreshAuth(req.body.refreshToken);
+    res.send({ ...tokens });
   });
 
   // static forgotPassword = catchAsync(async (req, res) => {
