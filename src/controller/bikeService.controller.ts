@@ -6,8 +6,8 @@ export class BikeServiceController {
   static addBikeServiceEntry = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
       try {
-        const vehical = await BikeServiceRepository.addbikeServices(req.body);
-        res.status(httpStatus.CREATED).send(vehical);
+        const data = await BikeServiceRepository.addbikeServices(req.body);
+        res.status(httpStatus.CREATED).send(data);
       } catch (error) {
         return next(error);
       }
@@ -15,13 +15,9 @@ export class BikeServiceController {
   );
 
   static getAllVehicle = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    // get single if village passed
-    // get region wise location if region passed
-    // get all location
     try {
-      // register logic here
-      const vehical = await BikeServiceRepository.getbikeServicess();
-      res.status(httpStatus.OK).send(vehical);
+      const data = await BikeServiceRepository.getbikeServicess();
+      res.status(httpStatus.OK).send(data);
     } catch (error) {
       return next(error);
     }

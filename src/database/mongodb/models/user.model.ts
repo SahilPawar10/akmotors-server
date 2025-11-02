@@ -37,12 +37,15 @@ const userSchema = new mongoose.Schema<IUserDocument, IUserModel>(
     number: {
       type: Number,
       required: true,
+      unique: true,
+      trim: true,
       min: 10,
     },
     email: {
       type: String,
       required: false,
       unique: true,
+      sparse: true, // ✅ Only applies unique constraint to documents that have an email
       trim: true,
       lowercase: true,
       validate(value: string) {

@@ -5,6 +5,7 @@ export const vehicles = pgTable("vehicles", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 100 }).notNull(),
   ownerNo: varchar("owner_no", { length: 20 }).unique().notNull(),
+  ownerName: varchar("owner_name", { length: 100 }).notNull(),
   registrationNumber: varchar("registration_number", { length: 255 }).unique().notNull(),
   location: varchar("location", { length: 255 }).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),

@@ -4,6 +4,7 @@ import { ValidationSchema } from "./custom.validation";
 export const addVehicleSchema: ValidationSchema = {
   body: Joi.object().keys({
     name: Joi.string().required(),
+    ownerName: Joi.string().required(),
     ownerNo: Joi.number().required(),
     registrationNumber: Joi.string().required(),
     location: Joi.string().required(),
